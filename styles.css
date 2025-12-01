@@ -25,6 +25,7 @@ body {
 }
 
 .container {
+    /* Reducir el ancho máximo para dispositivos más pequeños */
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
@@ -109,6 +110,7 @@ body {
 /* Estilos para las tarjetas de datos en vivo */
 .live-data-grid {
     display: grid;
+    /* Mantiene las columnas pero permite que se ajusten automáticamente */
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
     margin-bottom: 20px;
@@ -156,11 +158,24 @@ body {
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
     margin-bottom: 20px;
-    min-height: 350px; /* Altura mínima para gráficos */
-    display: flex; /* Para centrar canvas */
+    min-height: 350px;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
+
+/* Contenedor Flexbox para los dos gráficos */
+#historical-data .dashboard-section {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los gráficos pasen a la siguiente línea */
+    gap: 20px;
+}
+#historical-data .chart-container {
+    flex: 1 1 45%; /* En desktop, ocupa casi la mitad */
+    min-width: 300px; /* Ancho mínimo para que no se compriman demasiado */
+}
+/* Al hacer los gráficos flexibles, ya no necesitan el grid que tenían antes. */
+
 
 /* Tabla de Datos Históricos */
 .table-container {
@@ -169,6 +184,8 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+    /* 🔑 Habilitar el desplazamiento horizontal para la tabla */
+    overflow-x: auto;
 }
 
 .table-container h3 {
@@ -178,6 +195,8 @@ body {
 
 table {
     width: 100%;
+    /* Mínimo ancho para que la tabla no se colapse en pantallas pequeñas */
+    min-width: 600px;
     border-collapse: collapse;
     font-size: 0.9em;
 }
@@ -214,24 +233,6 @@ table tr:hover {
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilos responsivos */
-@media (max-width: 768px) {
-    .navbar .container {
-        flex-direction: column;
-    }
-    .navbar h1 {
-        margin-bottom: 10px;
-    }
-    .navbar nav ul {
-        flex-direction: column;
-        align-items: center;
-    }
-    .navbar nav ul li {
-        margin: 5px 0;
-    }
-}
-
-
 /* --- ESTILOS PARA INDICADORES DE CALIDAD --- */
 
 .indicator {
@@ -244,29 +245,78 @@ table tr:hover {
     text-align: center;
     color: var(--light-text-color);
 }
+/* ... (Estilos de indicador.pending, .clean, .medium, .high, .alert permanecen iguales) ... */
+.indicator.pending { background-color: #6c757d; }
+.indicator.clean { background-color: var(--success-color); }
+.indicator.medium { background-color: #ffc107; color: var(--text-color); }
+.indicator.high { background-color: #fd7e14; }
+.indicator.alert { background-color: var(--error-color); }
 
-/* Estado Inicial/Esperando */
-.indicator.pending {
-    background-color: #6c757d; /* Gris */
+
+/* ======================================================= */
+/* === RESPONSIVE DESIGN (Móviles y Tablets pequeñas) === */
+/* ======================================================= */
+@media (max-width: 768px) {
+
+    /* Contenedor principal: reducir relleno para ganar espacio */
+    .container {
+        padding: 10px;
+    }
+
+    /* Barra de Navegación: Apilado vertical */
+    .navbar .container {
+        flex-direction: column;
+        text-align: center;
+    }
+    .navbar h1 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+    .navbar nav ul {
+        /* Los enlaces se apilan horizontalmente si hay espacio, sino se centran */
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .navbar nav ul li {
+        margin: 5px 10px;
+    }
+
+    /* Secciones Generales */
+    .dashboard-section {
+        padding: 20px 15px;
+    }
+    .dashboard-section h2 {
+        font-size: 1.5em;
+    }
+
+    /* Datos en Vivo: Forzar apilado para evitar compresión excesiva de texto */
+    .live-data-grid {
+        /* Vuelve a una columna para garantizar que el texto grande quepa */
+        grid-template-columns: 1fr;
+    }
+    .card .value {
+        font-size: 2em; /* Reducir el tamaño de fuente grande */
+    }
+
+    /* Gráficos: Forzar apilado vertical y ancho completo */
+    #historical-data .chart-container {
+        flex: 1 1 100%; /* Ocupar todo el ancho disponible */
+        min-height: 300px; /* Altura mínima razonable para móvil */
+    }
+
+    /* Tabla: Asegurar legibilidad del texto */
+    table {
+        font-size: 0.8em;
+    }
 }
 
-/* Agua Muy Clara / Excelente */
-.indicator.clean {
-    background-color: #28a745; /* Verde */
-}
-
-/* Ligeramente Turbia / Aceptable */
-.indicator.medium {
-    background-color: #ffc107; /* Amarillo */
-    color: var(--text-color); /* Texto oscuro para el amarillo */
-}
-
-/* Moderadamente Turbia / Alta */
-.indicator.high {
-    background-color: #fd7e14; /* Naranja */
-}
-
-/* Agua Muy Turbia / Inaceptable */
-.indicator.alert {
-    background-color: #dc3545; /* Rojo */
+/* Responsive adicional para tablets medianas (opcional) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        padding: 15px;
+    }
+    /* En tablets, permitimos que las tarjetas en vivo se mantengan en 2 columnas si es posible */
+    .live-data-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
