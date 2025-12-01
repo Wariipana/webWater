@@ -1,0 +1,272 @@
+/* Variables CSS para fácil personalización */
+:root {
+    --primary-color: #0056b3; /* Azul oscuro para elementos principales */
+    --secondary-color: #f4f7f6; /* Fondo claro para secciones */
+    --text-color: #333;
+    --light-text-color: #f8f8f8;
+    --border-color: #e0e0e0;
+    --card-bg: #ffffff;
+    --success-color: #28a745; /* Verde para conectado */
+    --error-color: #dc3545; /* Rojo para desconectado */
+}
+
+/* Estilos Generales y Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--secondary-color);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Barra de Navegación */
+.navbar {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    padding: 15px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar h1 {
+    font-size: 1.8em;
+    margin: 0;
+}
+
+.navbar nav ul {
+    list-style: none;
+    display: flex;
+}
+
+.navbar nav ul li {
+    margin-left: 20px;
+}
+
+.navbar nav ul li a {
+    color: var(--light-text-color);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.navbar nav ul li a:hover,
+.navbar nav ul li a.active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Secciones del Dashboard */
+.dashboard-section {
+    background-color: var(--card-bg);
+    padding: 30px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-section h2 {
+    color: var(--primary-color);
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Indicador de estado de WebSocket */
+.status-indicator {
+    font-size: 0.9em;
+    font-weight: normal;
+}
+
+.status-indicator.connected {
+    color: var(--success-color);
+}
+
+.status-indicator.disconnected {
+    color: var(--error-color);
+}
+
+/* Estilos para las tarjetas de datos en vivo */
+.live-data-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.card {
+    background-color: #f8fcfb; /* Un blanco roto para diferenciación */
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+}
+
+.card h3 {
+    color: var(--primary-color);
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+
+.card .value {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: var(--text-color);
+    margin-bottom: 5px;
+}
+
+.card .label {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.update-info {
+    font-size: 0.9em;
+    color: #888;
+    text-align: right;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border-color);
+}
+
+/* Contenedores de Gráficos */
+.chart-container {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+    margin-bottom: 20px;
+    min-height: 350px; /* Altura mínima para gráficos */
+    display: flex; /* Para centrar canvas */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Tabla de Datos Históricos */
+.table-container {
+    margin-top: 30px;
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+}
+
+.table-container h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+}
+
+table th,
+table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+table th {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Pie de Página */
+.footer {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 40px;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .navbar .container {
+        flex-direction: column;
+    }
+    .navbar h1 {
+        margin-bottom: 10px;
+    }
+    .navbar nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+    .navbar nav ul li {
+        margin: 5px 0;
+    }
+}
+
+
+/* --- ESTILOS PARA INDICADORES DE CALIDAD --- */
+
+.indicator {
+    padding: 8px 15px;
+    border-radius: 4px;
+    margin-top: 15px;
+    font-weight: bold;
+    font-size: 1em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--light-text-color);
+}
+
+/* Estado Inicial/Esperando */
+.indicator.pending {
+    background-color: #6c757d; /* Gris */
+}
+
+/* Agua Muy Clara / Excelente */
+.indicator.clean {
+    background-color: #28a745; /* Verde */
+}
+
+/* Ligeramente Turbia / Aceptable */
+.indicator.medium {
+    background-color: #ffc107; /* Amarillo */
+    color: var(--text-color); /* Texto oscuro para el amarillo */
+}
+
+/* Moderadamente Turbia / Alta */
+.indicator.high {
+    background-color: #fd7e14; /* Naranja */
+}
+
+/* Agua Muy Turbia / Inaceptable */
+.indicator.alert {
+    background-color: #dc3545; /* Rojo */
+}

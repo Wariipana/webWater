@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Monitoreo de Calidad del Agua</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="index.js"></script>
+</head>
+<body>
+<header class="navbar">
+    <div class="container">
+        <h1>Monitoreo de Calidad del Agua</h1>
+        <nav>
+            <ul>
+                <li><a href="#live-data">Vista en Vivo</a></li>
+                <li><a href="#historical-data">Datos Históricos</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+    <section id="live-data" class="dashboard-section">
+        <h2>Vista en Vivo <span id="ws-status" class="status-indicator disconnected">● Desconectado</span></h2>
+        <div class="live-data-grid">
+            <div class="card">
+                <h3>Turbidez</h3>
+                <p class="value" id="turbidez-live">-- %</p>
+                <p class="label">Porcentaje</p>
+                <div id="turbidez-indicator" class="indicator pending">--</div>
+            </div>
+            <div class="card">
+                <h3>TDS</h3>
+                <p class="value" id="tds-live">-- ppm</p>
+                <p class="label">Partes por millón</p>
+                <div id="tds-indicator" class="indicator pending">--</div>
+            </div>
+        </div>
+        <p class="update-info">Última actualización: <span id="last-update">Esperando datos...</span></p>
+    </section>
+
+    <section id="historical-data" class="dashboard-section">
+        <h2>Datos Históricos</h2>
+        <div class="chart-container">
+            <canvas id="turbidezChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <canvas id="tdsChart"></canvas>
+        </div>
+        <div class="table-container">
+            <h3>Últimos Registros</h3>
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Fecha/Hora</th>
+                    <th>Turbidez (%)</th>
+                    <th>TDS (ppm)</th>
+                </tr>
+                </thead>
+                <tbody id="historical-table-body">
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <p>&copy; 2025 Monitoreo de Calidad del Agua. Todos los derechos reservados.</p>
+    </div>
+</footer>
+
+</body>
+</html>
